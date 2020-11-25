@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, Platform } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { NavigationStackProp } from "react-navigation-stack";
 
-import { CATEGORIES } from "../data/dummy.data";
+import { CATEGORIES, MEALS } from "../data/dummy.data";
+import MealType from "../types/meal.type";
 
 export interface CategoryMealsScreenProps {
 	navigation: NavigationStackProp;
@@ -16,18 +18,23 @@ const CategoryMealsScreen: React.FunctionComponent<CategoryMealsScreenProps> = (
 		({ id }) => id === selectedCategoryId
 	);
 
-	const handleNavigateToMealDetail = () => {
-		navigation.navigate({ routeName: "MealDetail" });
+	const selectedCategorymeals = MEALS.filter((meal) =>
+		meal.categoryIds.includes(selectedCategoryId)
+	);
+
+	const renderMealItem = ({ item }: { item: MealType }) => {
+		return (
+			<View>
+				<Text>{item.title}</Text>
+			</View>
+		);
 	};
 
 	if (!selectedCategory) return null;
 
 	return (
 		<View style={styles.container}>
-			<Text>The Categories Meals Screen!</Text>
-			<Text>{selectedCategory.title}</Text>
-			<Button title="Go to Meals!" onPress={handleNavigateToMealDetail} />
-			<Button title="Go Back!" onPress={() => navigation.goBack()} />
+			<FlatList data={selectedCategorymeals} renderItem={renderMealItem} />
 		</View>
 	);
 };
