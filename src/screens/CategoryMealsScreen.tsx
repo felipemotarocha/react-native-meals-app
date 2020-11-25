@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, Platform } from "react-native";
 import { NavigationStackProp } from "react-navigation-stack";
 
 import { CATEGORIES } from "../data/dummy.data";
@@ -48,6 +48,12 @@ const styles = StyleSheet.create({
 
 	return {
 		headerTitle: selectedCategory!.title,
+		headerStyle: {
+			backgroundColor:
+				Platform.OS === "android" ? selectedCategory!.color : "none",
+		},
+		headerTintColor:
+			Platform.OS === "android" ? "white" : selectedCategory!.color,
 	};
 };
 
