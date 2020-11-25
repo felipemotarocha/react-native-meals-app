@@ -48,4 +48,8 @@ const styles = StyleSheet.create({
 	},
 });
 
+(CategoriesScreen as any).navigationOptions = (data: any) => ({
+	headerTitle: "Categories",
+});
+
 export default CategoriesScreen;

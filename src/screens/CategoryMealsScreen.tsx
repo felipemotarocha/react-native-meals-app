@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Platform } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { NavigationStackProp } from "react-navigation-stack";
-import COLORS from "../constants/colors.constant";
 
 import { CATEGORIES } from "../data/dummy.data";
 
@@ -33,6 +32,14 @@ const CategoryMealsScreen: React.FunctionComponent<CategoryMealsScreenProps> = (
 	);
 };
 
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+});
+
 (CategoryMealsScreen as any).navigationOptions = (data: any) => {
 	const selectedCategoryId = data.navigation.getParam("selectedCategoryId");
 	const selectedCategory = CATEGORIES.find(
@@ -41,19 +48,7 @@ const CategoryMealsScreen: React.FunctionComponent<CategoryMealsScreenProps> = (
 
 	return {
 		headerTitle: selectedCategory!.title,
-		headerStyle: {
-			backgroundColor: Platform.OS === "android" ? COLORS.primaryColor : "none",
-		},
-		headerTintColor: Platform.OS === "android" ? "white" : COLORS.primaryColor,
 	};
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-});
 
 export default CategoryMealsScreen;

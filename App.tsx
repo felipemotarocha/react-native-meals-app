@@ -1,6 +1,10 @@
 import { useFonts } from "expo-font";
 import React from "react";
+import { enableScreens } from "react-native-screens";
+
 import MealsNavigator from "./src/navigation/MealsNavigator";
+
+enableScreens();
 
 const App = () => {
 	const [fontHasBeenLoaded] = useFonts({
