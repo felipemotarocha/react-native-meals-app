@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, Platform } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { NavigationStackProp } from "react-navigation-stack";
 
+import MealItem from "../components/meal-item.component";
 import { CATEGORIES, MEALS } from "../data/dummy.data";
 import MealType from "../types/meal.type";
 
@@ -24,9 +25,14 @@ const CategoryMealsScreen: React.FunctionComponent<CategoryMealsScreenProps> = (
 
 	const renderMealItem = ({ item }: { item: MealType }) => {
 		return (
-			<View>
-				<Text>{item.title}</Text>
-			</View>
+			<MealItem
+				title={item.title}
+				duration={item.duration}
+				complexity={item.complexity}
+				affordability={item.affordability}
+				backgroundImageUrl={item.imageUrl}
+				onSeleactMeal={() => {}}
+			/>
 		);
 	};
 
@@ -34,7 +40,11 @@ const CategoryMealsScreen: React.FunctionComponent<CategoryMealsScreenProps> = (
 
 	return (
 		<View style={styles.container}>
-			<FlatList data={selectedCategorymeals} renderItem={renderMealItem} />
+			<FlatList
+				data={selectedCategorymeals}
+				renderItem={renderMealItem}
+				style={styles.mealsList}
+			/>
 		</View>
 	);
 };
@@ -44,6 +54,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+		paddingHorizontal: 10,
+		paddingVertical: 10,
+	},
+	mealsList: {
+		width: "100%",
 	},
 });
 

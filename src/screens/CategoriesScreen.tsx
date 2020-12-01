@@ -5,7 +5,7 @@ import { NavigationStackProp } from "react-navigation-stack";
 
 import { CATEGORIES } from "../data/dummy.data";
 import CategoryType from "../types/category.type";
-import CategoryGridTile from "./CategoryGridTile";
+import CategoryGridTile from "../components/CategoryGridTile";
 
 export interface CategoriesScreenProps {
 	navigation: NavigationStackProp;
