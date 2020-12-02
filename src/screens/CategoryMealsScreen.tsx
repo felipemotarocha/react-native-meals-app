@@ -1,11 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Platform } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { Platform } from "react-native";
 import { NavigationStackProp } from "react-navigation-stack";
+import MealList from "../components/meal-list.component";
 
-import MealItem from "../components/meal-item.component";
 import { CATEGORIES, MEALS } from "../data/dummy.data";
-import MealType from "../types/meal.type";
 
 export interface CategoryMealsScreenProps {
 	navigation: NavigationStackProp;
@@ -23,44 +21,10 @@ const CategoryMealsScreen: React.FunctionComponent<CategoryMealsScreenProps> = (
 		meal.categoryIds.includes(selectedCategoryId)
 	);
 
-	const renderMealItem = ({ item }: { item: MealType }) => {
-		return (
-			<MealItem
-				id={item.id}
-				title={item.title}
-				duration={item.duration}
-				complexity={item.complexity}
-				affordability={item.affordability}
-				backgroundImageUrl={item.imageUrl}
-				onSeleactMeal={() => {}}
-			/>
-		);
-	};
-
 	if (!selectedCategory) return null;
 
-	return (
-		<View style={styles.container}>
-			<FlatList
-				data={selectedCategorymeals}
-				renderItem={renderMealItem}
-				style={styles.mealsList}
-			/>
-		</View>
-	);
+	return <MealList meals={selectedCategorymeals} />;
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		paddingHorizontal: 10,
-	},
-	mealsList: {
-		width: "100%",
-	},
-});
 
 (CategoryMealsScreen as any).navigationOptions = (data: any) => {
 	const selectedCategoryId = data.navigation.getParam("selectedCategoryId");
