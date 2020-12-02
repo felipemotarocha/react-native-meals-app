@@ -1,7 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { NavigationStackProp } from "react-navigation-stack";
+
 import { MEALS } from "../data/dummy.data";
+
+import CustomHeaderButton from "../components/custom-header-button.component";
 
 export interface MealDetailScreenProps {
 	navigation: NavigationStackProp;
@@ -33,6 +37,17 @@ const MealDetailScreen: React.FunctionComponent<MealDetailScreenProps> = ({
 	const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 	return {
 		headerTitle: selectedMeal!.title,
+		headerRight: () => (
+			<HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+				<Item
+					title="Favorite"
+					iconName="ios-star"
+					onPress={() => {
+						console.log("mark as favorite");
+					}}
+				/>
+			</HeaderButtons>
+		),
 	};
 };
 

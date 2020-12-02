@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		paddingHorizontal: 10,
-		paddingVertical: 10,
 	},
 	mealsList: {
 		width: "100%",
