@@ -5,29 +5,42 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 	ImageBackground,
-	TouchableWithoutFeedback,
 } from "react-native";
-
-import MealType from "../types/meal.type";
+import { withNavigation } from "react-navigation";
+import { NavigationStackProp } from "react-navigation-stack";
 
 export interface MealItemProps {
+	id: string;
 	title: string;
 	duration: number;
 	complexity: string;
 	affordability: string;
 	backgroundImageUrl: string;
 	onSeleactMeal: () => void;
+	navigation: NavigationStackProp;
 }
 
 const MealItem: React.FunctionComponent<MealItemProps> = ({
+	id,
 	title,
 	duration,
 	complexity,
 	affordability,
 	backgroundImageUrl,
+	navigation,
 }) => {
+	const handleNavigateToMealDetailsScreen = () => {
+		navigation.navigate({
+			routeName: "MealDetail",
+			params: { mealId: id },
+		});
+	};
+
 	return (
-		<TouchableOpacity onPress={() => {}} style={styles.mealContainer}>
+		<TouchableOpacity
+			onPress={handleNavigateToMealDetailsScreen}
+			style={styles.mealContainer}
+		>
 			<View style={styles.mealContent}>
 				<ImageBackground
 					source={{ uri: backgroundImageUrl }}
@@ -45,7 +58,6 @@ const MealItem: React.FunctionComponent<MealItemProps> = ({
 					</View>
 				</ImageBackground>
 			</View>
-			{/* <View style={{ ...styles.mealRow, ...styles.mealDetail }}></View> */}
 		</TouchableOpacity>
 	);
 };
@@ -88,4 +100,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default MealItem;
+export default withNavigation(MealItem);

@@ -26,6 +26,7 @@ const CategoryMealsScreen: React.FunctionComponent<CategoryMealsScreenProps> = (
 	const renderMealItem = ({ item }: { item: MealType }) => {
 		return (
 			<MealItem
+				id={item.id}
 				title={item.title}
 				duration={item.duration}
 				complexity={item.complexity}
